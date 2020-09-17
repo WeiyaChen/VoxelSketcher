@@ -119,7 +119,7 @@ public class ObjectManipulator : MonoBehaviour
             o.basePoint += delta;
         }
     }
-
+                              
     private void MoveObjectByController()
     {
         foreach (var o in objectSelector.selectedObjects)
