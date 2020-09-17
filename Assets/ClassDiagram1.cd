@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="VoxelSystem.GPUVoxelData" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAFDAgAAQAYAAAAEAAEAAAAAAgAABAIAAAQAA=</HashCode>
+      <FileName>Assets\Packages\Voxelizer\Scripts\GPUVoxelData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="VoxelSystem.GPUVoxelizer" Collapsed="true">
+    <Position X="16" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAASAAYEAABEABABWBAACAQAAAgAAkJAAAAQEACBg=</HashCode>
+      <FileName>Assets\Packages\Voxelizer\Scripts\GPUVoxelizer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VoxelSystem.Kernel" Collapsed="true">
+    <Position X="14.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAcAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAEAAAABAAA=</HashCode>
+      <FileName>Assets\Packages\Voxelizer\Scripts\Kernel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VoxelSystem.VoxelMesh" Collapsed="true">
+    <Position X="16" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Packages\Voxelizer\Scripts\VoxelMesh.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Voxelizer" Collapsed="true">
+    <Position X="14.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAEAg=</HashCode>
+      <FileName>Assets\Packages\Voxelizer\Scripts\Voxelizer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VoxelInfo" Collapsed="true">
+    <Position X="9" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAACAAABAAAAAAAAAABEAAA=</HashCode>
+      <FileName>Assets\Scripts\DataLibrary\VoxelInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VoxelInfoLibrary" Collapsed="true">
+    <Position X="10.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\DataLibrary\VoxelInfoLibrary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VoxelGrid3DProcessor" Collapsed="true">
+    <Position X="9" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Datatype\Grid3DProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GridData2D&lt;DType&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgJCIAAAAQAAAAAEAAAAAAABAAAAAAAAACAAA=</HashCode>
+      <FileName>Assets\Scripts\Datatype\GridData2D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GridData3D&lt;DType&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgJCIAAAAQAAAAAEBAAAAAABAAAAAAAAACAAA=</HashCode>
+      <FileName>Assets\Scripts\Datatype\GridData3D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MathHelper" Collapsed="true">
+    <Position X="16" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\MathHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CameraController" Collapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAwgAAAAAAAAAIJAAAAAAAAAAAAAAAAAECAACAA=</HashCode>
+      <FileName>Assets\Scripts\Player\CameraController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FaceIndicator" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUAAAAAAAAAAAAAAAQAAAAAAAIAAAAAAAAQAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Player\FaceStretcher\FaceIndicator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FaceSelector" Collapsed="true">
+    <Position X="2.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAQAAAACAAAAAAgAAAAAAAAAAAACCIAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Player\FaceStretcher\FaceSelector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FaceStretcher" Collapsed="true">
+    <Position X="4" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBUAAABAAAAAAAABAAAAAAAAAAAAAAAAAAAAEAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Player\FaceStretcher\FaceStretcher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HitPointReader" Collapsed="true">
+    <Position X="12.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAgAA=</HashCode>
+      <FileName>Assets\Scripts\Player\HitPointReader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MouseIndicator" Collapsed="true">
+    <Position X="12.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\MouseIndicator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjectManipulator" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\ObjectManipulation\ObjectManipulator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjectSelector" Collapsed="true">
+    <Position X="2.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAQAAAAAAAAAAAAAAAAAIAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Player\ObjectManipulation\ObjectSelector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ToolManager" Collapsed="true">
+    <Position X="6.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAACAAAAAAAAAAAMAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\ToolManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VoxelPlacer" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAACQAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\VoxelPlacer\VoxelPlacer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WorldObject" Collapsed="true">
+    <Position X="10.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Player\WorldObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Singleton&lt;T&gt;" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAFBAAAAAAAAAAAAAQAAAAAAAAAAABAQAAAABAAAMA=</HashCode>
+      <FileName>Assets\Scripts\Singleton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrefabAttribute" Collapsed="true">
+    <Position X="16" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Singleton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HUD" Collapsed="true">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\HUD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjectComponent" Collapsed="true">
+    <Position X="7.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUABAQAAAAAAAAAAAAACAACBAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\WorldManagement\ObjectComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjectData" Collapsed="true">
+    <Position X="9.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAACAAAACAAAABBAAAFAAAA=</HashCode>
+      <FileName>Assets\Scripts\WorldManagement\ObjectData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WorldData" Collapsed="true">
+    <Position X="7.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAACAAAAAABAEAgIAAQoAACAGAABAAARAAAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\WorldManagement\WorldData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WorldDataManager" Collapsed="true">
+    <Position X="4.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAACEA=</HashCode>
+      <FileName>Assets\Scripts\WorldManagement\WorldDataManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="VoxelSystem.Voxel_t" Collapsed="true">
+    <Position X="16" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAhAAAAAABAAAAAAAAAAIABAAAAAAAAAAAgAAAAAAgA=</HashCode>
+      <FileName>Assets\Packages\Voxelizer\Scripts\Voxel.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Matrix3x3" Collapsed="true">
+    <Position X="10.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAQAAAAAAAAAAAAAAAACACAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Datatype\Matrix3x3.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="SelectionPoint" Collapsed="true">
+    <Position X="12.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\FaceStretcher\FaceSelector.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="HitPoint" Collapsed="true">
+    <Position X="9" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\HitPointReader.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Voxel" Collapsed="true">
+    <Position X="14.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\WorldManagement\ObjectData.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
