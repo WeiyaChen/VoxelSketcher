@@ -5,12 +5,15 @@ using Valve.VR;
 public class ObjectManipulator : MonoBehaviour
 {
     public ObjectSelector objectSelector;
-    public SteamVR_Action_Boolean copyInput;
-    public SteamVR_Action_Boolean moveInput;
-    public SteamVR_Action_Vector3 handPose;
 
-    private Vector3 moveStartLoc;
+    private VRInputController vrcon;
+    private Vector3 moveStartLocHand;
+    private Vector3Int moveStartLocObj;
 
+    private void Start()
+    {
+        vrcon = GameObject.Find("VRInputController").GetComponent<VRInputController>();
+    }
 
     private void Update()
     {
@@ -18,9 +21,35 @@ public class ObjectManipulator : MonoBehaviour
 
         if (ToolManager.Instance.Imode == ToolManager.InteractionMode.VR)
         {
-            if (moveInput.stateDown)
+            // 按下按钮
+            if (vrcon.moveObjectInput.stateDown)
             {
-                moveStartLoc = handPose.axis;
+                moveStartLocHand = vrcon.rightHand.transform.position;
+
+                // 选中Object，准备平移
+                ObjectComponent[] os = WorldDataManager.Instance.ActiveWorld.GetVoxelObjectsAt(vrcon.rightHand.transform.position);
+                if (os.Length == 0)
+                {
+                    objectSelector.selectedObjects.Clear();
+                }
+                else
+                {
+                    foreach (var o in os)
+                    {
+                        if (!objectSelector.selectedObjects.Contains(os[0]))
+                        {
+                            objectSelector.selectedObjects.Add(o);
+                            Debug.Log("Object picked " + objectSelector.selectedObjects);
+                            // 记录下Object当前的位置
+                            moveStartLocObj = o.basePoint;
+                        }
+                    }
+                }
+   
+            }
+            if (vrcon.moveObjectInput.stateUp)
+            {
+                objectSelector.selectedObjects.Clear();
             }
         }
     }
@@ -60,7 +89,7 @@ public class ObjectManipulator : MonoBehaviour
         }
         else if (mode == ToolManager.InteractionMode.VR)
         {
-            if (this.moveInput.state)
+            if (vrcon.moveObjectInput.state)
             {
                 MoveObjectByController();
             }
@@ -124,10 +153,18 @@ public class ObjectManipulator : MonoBehaviour
     {
         foreach (var o in objectSelector.selectedObjects)
         {
-            Vector3 direction = this.handPose.axis - this.moveStartLoc;
-            Vector3Int delta = new Vector3Int();
-            delta = MathHelper.WorldOriToMainAxis(direction);
-            o.basePoint += delta;
+            Vector3 direction = vrcon.rightHand.transform.position - this.moveStartLocHand;
+            Debug.Log("this.moveStartLoc: " + this.moveStartLocHand);
+            Debug.Log("vrcon.rightHand.transform.position: " + vrcon.rightHand.transform.position);
+            Debug.Log("direction: " + direction.ToString("f4"));
+
+            Vector3Int delta_axis = new Vector3Int();
+            delta_axis = MathHelper.WorldOriToMainAxis(direction);
+            Debug.Log("delta: " + delta_axis);
+            int delta_mag = Mathf.CeilToInt(direction.magnitude * 100) / 10;
+            delta_axis.Scale(new Vector3Int(delta_mag, delta_mag, delta_mag));
+            o.basePoint = this.moveStartLocObj + delta_axis;
+            Debug.Log("o.basePoint: " + o.basePoint);
         }
     }
 }

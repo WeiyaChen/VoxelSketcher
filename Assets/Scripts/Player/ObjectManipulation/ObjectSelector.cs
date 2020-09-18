@@ -4,6 +4,9 @@ public class ObjectSelector : MonoBehaviour
 {
     public HitPointReader hitPointReader;
     public List<ObjectComponent> selectedObjects;
+
+    private VRInputController vrcon;
+
     private void Awake()
     {
         selectedObjects = new List<ObjectComponent>();
@@ -11,54 +14,69 @@ public class ObjectSelector : MonoBehaviour
 
     private void Start()
     {
-        selectedObjects.Add(WorldDataManager.Instance.ActiveWorld.GetVoxelObject(0));
+        vrcon = GameObject.Find("VRInputController").GetComponent<VRInputController>();
+        //selectedObjects.Add(WorldDataManager.Instance.ActiveWorld.GetVoxelObject(0));
     }
 
     private void Update()
     {
-        //click to select pointing object 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && hitPointReader.hitting)
+        ProcessInput(ToolManager.Instance.Imode);           
+    }
+
+    private void ProcessInput(ToolManager.InteractionMode mode)
+    {
+        if (mode == ToolManager.InteractionMode.Desktop)
         {
-            //holding contorl to addon to exsiting ones
-            if (!Input.GetKey(KeyCode.LeftControl))
+            // click to select pointing object 
+            if (Input.GetKeyDown(KeyCode.Mouse0) && hitPointReader.hitting)
             {
-                selectedObjects.Clear();
-            }
-
-            ObjectComponent[] os =
-                WorldDataManager.Instance.ActiveWorld.GetVoxelObjectsAt(
-                    hitPointReader.hitPoint.position - hitPointReader.hitPoint.normal / 2);
-
-
-            //holding shift to only get first one
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                if (!selectedObjects.Contains(os[0]))
+                // 按住 contorl 键增加被选中的物体
+                if (!Input.GetKey(KeyCode.LeftControl))
                 {
-                    selectedObjects.Add(os[0]);
+                    selectedObjects.Clear();
                 }
 
-            }
-            else
-            {
-                foreach (var o in os)
+                ObjectComponent[] os =
+                    WorldDataManager.Instance.ActiveWorld.GetVoxelObjectsAt(
+                        hitPointReader.hitPoint.position - hitPointReader.hitPoint.normal / 2);
+
+
+                //holding shift to only get first one
+                if (Input.GetKey(KeyCode.LeftShift))
                 {
                     if (!selectedObjects.Contains(os[0]))
                     {
-                        selectedObjects.Add(o);
+                        selectedObjects.Add(os[0]);
+                    }
+
+                }
+                else
+                {
+                    foreach (var o in os)
+                    {
+                        if (!selectedObjects.Contains(os[0]))
+                        {
+                            selectedObjects.Add(o);
+                        }
                     }
                 }
+
+
+                Debug.Log("Selected Object " + selectedObjects);
+            }
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                var last = selectedObjects[0];
+                selectedObjects.Clear();
+                selectedObjects.Add(WorldDataManager.Instance.ActiveWorld.GetNextObject(last));
+                Debug.Log("Selected Object " + selectedObjects);
             }
 
-
-            Debug.Log("Selected Object " + selectedObjects);
         }
-        if (Input.GetKeyDown(KeyCode.Tab))
+        else
         {
-            var last = selectedObjects[0];
-            selectedObjects.Clear();
-            selectedObjects.Add(WorldDataManager.Instance.ActiveWorld.GetNextObject(last));
-            Debug.Log("Selected Object " + selectedObjects);
+            
+            
         }
     }
 }

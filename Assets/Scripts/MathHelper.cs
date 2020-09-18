@@ -19,15 +19,37 @@ public static class MathHelper
     {
         if ((Mathf.Abs(worldOri.x) > Mathf.Abs(worldOri.y)) && (Mathf.Abs(worldOri.x) > Mathf.Abs(worldOri.y)))
         {
-            return new Vector3Int(1, 0, 0);
+            if (worldOri.x >= 0)
+            {
+                return new Vector3Int(1, 0, 0);
+            }
+            else
+            {
+                return new Vector3Int(-1, 0, 0);
+            }
+            
         }
         else if ((Mathf.Abs(worldOri.y) > Mathf.Abs(worldOri.x)) && (Mathf.Abs(worldOri.y) > Mathf.Abs(worldOri.z)))
         {
-            return new Vector3Int(0, 1, 0);
+            if (worldOri.y >= 0)
+            {
+                return new Vector3Int(0, 1, 0);
+            }
+            else
+            {
+                return new Vector3Int(0, -1, 0);
+            }
         }
         else
         {
-            return new Vector3Int(0, 0, 1);
+            if (worldOri.z >= 0)
+            {
+                return new Vector3Int(0, 0, 1);
+            }
+            else
+            {
+                return new Vector3Int(0, 0, -1);
+            }
         }
     }
 }

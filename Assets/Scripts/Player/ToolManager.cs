@@ -97,11 +97,13 @@ public class ToolManager : Singleton<ToolManager>
         if (Input.GetKeyDown(KeyCode.F4) && Imode == InteractionMode.Desktop)
         {
             Imode = InteractionMode.VR;
+            Debug.Log("InteractionMode.VR");
         }
         // VR to desktop
         if (Input.GetKeyDown(KeyCode.F5) && Imode == InteractionMode.VR)
         {
             Imode = InteractionMode.Desktop;
+            Debug.Log("InteractionMode.Desktop");
         }
     }
 }
