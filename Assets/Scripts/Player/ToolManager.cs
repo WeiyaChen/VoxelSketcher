@@ -17,8 +17,7 @@ public class ToolManager : Singleton<ToolManager>
 
     public enum ToolMode
     {
-        PlaceVoxel,
-        FaceStretch,
+        VoxelManipulation,
         ObjectManipulation
     }
     public ToolMode Tmode;
@@ -47,15 +46,10 @@ public class ToolManager : Singleton<ToolManager>
         {
             if (Input.GetKeyDown(KeyCode.F1))
             {
-                Tmode = ToolMode.PlaceVoxel;
+                Tmode = ToolMode.VoxelManipulation;
                 ToolModeSwitching();
             }
             else if (Input.GetKeyDown(KeyCode.F2))
-            {
-                Tmode = ToolMode.FaceStretch;
-                ToolModeSwitching();
-            }
-            else if (Input.GetKeyDown(KeyCode.F3))
             {
                 Tmode = ToolMode.ObjectManipulation;
                 ToolModeSwitching();
@@ -71,14 +65,8 @@ public class ToolManager : Singleton<ToolManager>
     {
         switch (Tmode)
         {
-            case ToolMode.PlaceVoxel:
+            case ToolMode.VoxelManipulation:
                 voxelPlacer.gameObject.SetActive(true);
-                faceStretcher.gameObject.SetActive(false);
-                objectManipulator.gameObject.SetActive(false);
-                break;
-            case ToolMode.FaceStretch:
-                voxelPlacer.gameObject.SetActive(false);
-                faceStretcher.gameObject.SetActive(true);
                 objectManipulator.gameObject.SetActive(false);
                 break;
             case ToolMode.ObjectManipulation:
@@ -94,13 +82,13 @@ public class ToolManager : Singleton<ToolManager>
     public void InteractionModeUpdate()
     {
         // Switch to VR mode
-        if (Input.GetKeyDown(KeyCode.F4) && Imode == InteractionMode.Desktop)
+        if (Input.GetKeyDown(KeyCode.F3) && Imode == InteractionMode.Desktop)
         {
             Imode = InteractionMode.VR;
             Debug.Log("InteractionMode.VR");
         }
         // VR to desktop
-        if (Input.GetKeyDown(KeyCode.F5) && Imode == InteractionMode.VR)
+        if (Input.GetKeyDown(KeyCode.F4) && Imode == InteractionMode.VR)
         {
             Imode = InteractionMode.Desktop;
             Debug.Log("InteractionMode.Desktop");

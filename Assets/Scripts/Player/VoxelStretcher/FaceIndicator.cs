@@ -24,7 +24,7 @@ public class FaceIndicator : MonoBehaviour
         {
             foreach (var v in pair.Value)
             {
-                Vector3Int p = v + pair.Key.basePoint;
+                Vector3Int p = v + pair.Key.gridBasePoint;
 
 
                 //Do not need repeated points
@@ -53,8 +53,8 @@ public class FaceIndicator : MonoBehaviour
                     foreach (var dp in ObjectData.QUAD_VERTS[i])
                     {
                         totalIndices.Add(totalIndices.Count);
-                        totalVertices.Add(v+dp);
-                    }
+                        totalVertices.Add((v+dp) * WorldDataManager.Instance.ActiveWorld.worldSize);
+        }
                 }
 
             }

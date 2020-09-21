@@ -23,40 +23,6 @@ public class ObjectManipulator : MonoBehaviour
     private void Update()
     {
         ProcessInput(ToolManager.Instance.Imode);
-
-        if (ToolManager.Instance.Imode == ToolManager.InteractionMode.VR)
-        {
-            // 按下按钮
-            if (vrcon.moveObjectInput.stateDown)
-            {
-                moveStartLocHand = vrcon.rightHand.transform.position;
-
-                // 选中Object，准备平移
-                ObjectComponent[] os = WorldDataManager.Instance.ActiveWorld.GetVoxelObjectsAt(vrcon.rightHand.transform.position);
-                if (os.Length == 0)
-                {
-                    objectSelector.selectedObjects.Clear();
-                }
-                else
-                {
-                    foreach (var o in os)
-                    {
-                        if (!objectSelector.selectedObjects.Contains(os[0]))
-                        {
-                            objectSelector.selectedObjects.Add(o);
-                            Debug.Log("Object picked " + objectSelector.selectedObjects);
-                            // 记录下Object当前的位置
-                            moveStartLocObj = o.basePoint;
-                        }
-                    }
-                }
-   
-            }
-            if (vrcon.moveObjectInput.stateUp)
-            {
-                objectSelector.selectedObjects.Clear();
-            }
-        }
     }
 
     private void ProcessInput(ToolManager.InteractionMode mode)
@@ -94,12 +60,77 @@ public class ObjectManipulator : MonoBehaviour
         }
         else if (mode == ToolManager.InteractionMode.VR)
         {
-            if (vrcon.moveObjectInput.state)
+            // 按下正面按钮
+            if (vrcon.moveObjectInput.stateDown)
+            {
+                moveStartLocHand = vrcon.rightHand.transform.position;
+
+                // 选中Object，准备平移
+                ObjectComponent[] os = WorldDataManager.Instance.ActiveWorld.GetVoxelObjectsAt(vrcon.rightHand.transform.position);
+                if (os.Length == 0)
+                {
+                    objectSelector.selectedObjects.Clear();
+                }
+                else
+                {
+                    foreach (var o in os)
+                    {
+                        if (!objectSelector.selectedObjects.Contains(os[0]))
+                        {
+                            objectSelector.selectedObjects.Add(o);
+                            Debug.Log("Object picked " + objectSelector.selectedObjects);
+                            // 记录下Object当前的位置
+                            moveStartLocObj = o.gridBasePoint;
+                        }
+                    }
+                }
+
+            }
+            // 放开正面按钮
+            if (vrcon.moveObjectInput.stateUp)
+            {
+                objectSelector.selectedObjects.Clear();
+            }
+
+            // 保持按住正面按钮
+            if (vrcon.moveObjectInput.state || vrcon.copyObjectInput.state)
             {
                 MoveObjectByController();
             }
-        }
 
+            // 按下扳机键，启动复制
+            if (vrcon.copyObjectInput.stateDown)
+            {
+                moveStartLocHand = vrcon.rightHand.transform.position;
+
+                // 选中Object，准备复制
+                ObjectComponent[] os = WorldDataManager.Instance.ActiveWorld.GetVoxelObjectsAt(vrcon.rightHand.transform.position);
+                if (os.Length == 0)
+                {
+                    objectSelector.selectedObjects.Clear();
+                }
+                else
+                {
+                    foreach (var o in os)
+                    {
+                        if (!objectSelector.selectedObjects.Contains(os[0]))
+                        {
+                            objectSelector.selectedObjects.Add(o);
+                            Debug.Log("Object picked " + objectSelector.selectedObjects);
+                            // 记录下Object当前的位置
+                            moveStartLocObj = o.gridBasePoint;
+                        }
+                    }
+                    CopyObject();
+                }
+            }
+
+            // 放开扳机键
+            if (vrcon.copyObjectInput.stateUp)
+            {
+                objectSelector.selectedObjects.Clear();
+            }
+        }
     }
 
     /// <summary>
@@ -161,10 +192,11 @@ public class ObjectManipulator : MonoBehaviour
         }
         foreach (var o in objectSelector.selectedObjects)
         {
-            o.basePoint += delta;
+            o.gridBasePoint += delta;
         }
     }
-                              
+    
+    // 根据手相对于抓取时刻的位置，判定Object移动的方向和距离
     private void MoveObjectByController()
     {
         foreach (var o in objectSelector.selectedObjects)
@@ -179,8 +211,8 @@ public class ObjectManipulator : MonoBehaviour
             Debug.Log("delta: " + delta_axis);
             int delta_mag = Mathf.CeilToInt(direction.magnitude * 100) / 10;
             delta_axis.Scale(new Vector3Int(delta_mag, delta_mag, delta_mag));
-            o.basePoint = this.moveStartLocObj + delta_axis;
-            Debug.Log("o.basePoint: " + o.basePoint);
+            o.gridBasePoint = this.moveStartLocObj + delta_axis;
+            Debug.Log("o.basePoint: " + o.gridBasePoint);
         }
     }
 }

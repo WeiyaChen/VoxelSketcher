@@ -143,7 +143,7 @@ public class ObjectData
                         var verts = voxelVertListDict[pair.Value.voxel];
                         foreach (var p in QUAD_VERTS[i])
                         {
-                            verts.Add(p+pair.Key);
+                            verts.Add((p + pair.Key) * WorldDataManager.Instance.ActiveWorld.worldSize);
                         }
                     }
 

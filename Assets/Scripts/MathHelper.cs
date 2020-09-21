@@ -15,6 +15,15 @@ public static class MathHelper
         return value;
     }
 
+    static public Vector3 IntPosScaleByFloat(Vector3Int IntPos, float scale)
+    {
+        Vector3 value = new Vector3(
+            IntPos.x * scale,
+            IntPos.y * scale,
+            IntPos.z * scale);
+        return value;
+    }
+
     static public Vector3Int WorldOriToMainAxis(Vector3 worldOri)
     {
         if ((Mathf.Abs(worldOri.x) > Mathf.Abs(worldOri.y)) && (Mathf.Abs(worldOri.x) > Mathf.Abs(worldOri.y)))
