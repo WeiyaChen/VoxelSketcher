@@ -5,10 +5,24 @@ using UnityEngine.Rendering;
 using UnityEngine.SocialPlatforms;
 
 [Serializable]
-public struct Voxel
+public struct Voxel : IEquatable<Voxel>
 {
     public VoxelInfo voxel;
     public Color color;
+
+    public bool Equals(Voxel other)
+    {
+        return EqualityComparer<VoxelInfo>.Default.Equals(voxel, other.voxel) &&
+               color.Equals(other.color);
+    }
+
+    public override int GetHashCode()
+    {
+        int hashCode = 1806356647;
+        hashCode = hashCode * -1521134295 + EqualityComparer<VoxelInfo>.Default.GetHashCode(voxel);
+        hashCode = hashCode * -1521134295 + color.GetHashCode();
+        return hashCode;
+    }
 }
 
 public class ObjectData
@@ -79,15 +93,15 @@ public class ObjectData
 
     public Voxel GetVoxelAt(Vector3Int localPosition)
     {
-        foreach (var pair in VoxelDataDict)
+        if (VoxelDataDict.ContainsKey(localPosition))
         {
-            //Found
-            if (pair.Key == localPosition)
-                return pair.Value;
+            return VoxelDataDict[localPosition];
         }
+        else
         //Not Found
         return new Voxel();
     }
+
     public void SetVoxelAt(Vector3Int localPosition, Voxel v)
     {
         if (v.voxel == null)

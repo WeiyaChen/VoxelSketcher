@@ -2,11 +2,16 @@
 using UnityEngine;
 using Valve.VR;
 
+/// <summary>
+/// 包含所有对Object的操作
+/// </summary>
 public class ObjectManipulator : MonoBehaviour
 {
     public ObjectSelector objectSelector;
 
     private VRInputController vrcon;
+
+    // 移动物体
     private Vector3 moveStartLocHand;
     private Vector3Int moveStartLocObj;
 
@@ -95,6 +100,17 @@ public class ObjectManipulator : MonoBehaviour
             }
         }
 
+    }
+
+    /// <summary>
+    /// 根据双手距离，决定其边长，创建一个立方体
+    /// </summary>
+    private void CreateNewObject()
+    {
+        Vector3 leftPoint = vrcon.leftHand.transform.position;
+        Vector3 rightPoint = vrcon.leftHand.transform.position;
+        float edge = (leftPoint - rightPoint).magnitude;
+        //TODO
     }
 
     private void CopyObject()
