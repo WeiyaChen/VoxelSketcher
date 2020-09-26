@@ -165,6 +165,7 @@ public class WorldData
 
         ObjectList.Add(c);
     }
+
     public ObjectComponent CopyObject(ObjectComponent o)
     {
         var newObject = CreateNewObject(o.gridBasePoint);
@@ -177,14 +178,22 @@ public class WorldData
         return newObject;
         
     }
+
     public ObjectComponent GetVoxelObject(int index)
     {
         return ObjectList[index];
     }
+
     public int GetVoxelObjectIndex(ObjectComponent o)
     {
         return ObjectList.IndexOf(o);
     }
+
+    /// <summary>
+    /// 返回wordlPos位置处有voxel的Object集合
+    /// </summary>
+    /// <param name="worldPos"></param>
+    /// <returns>Object数组</returns>
     public ObjectComponent[] GetVoxelObjectsAt(Vector3 worldPos)
     {
         List<ObjectComponent> result = new List<ObjectComponent>();

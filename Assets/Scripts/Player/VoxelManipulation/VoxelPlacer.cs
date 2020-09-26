@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class VoxelPlacer : MonoBehaviour
 {
+    // 桌面变量
     public HitPointReader hitPointReader;
     public ObjectSelector objectSelector;
 
     private VRInputController vrcon;
+    // 当前正在被修改的Object
+    private ObjectComponent targetObj;
 
     public Voxel voxelArg;
 
@@ -94,18 +97,19 @@ public class VoxelPlacer : MonoBehaviour
                 }
             }
         }
-        else
+        else // VR mode
         {
-            // 按下正面按钮
+            // 按下面板键
             if (vrcon.moveObjectInput.stateDown)
             {
-                // 选中Voxel
-                ObjectComponent[] os = WorldDataManager.Instance.ActiveWorld.GetVoxelObjectsAt(vrcon.rightHand.transform.position);
-                if (os.Length == 0)
+                // 选中位置的信息存入Voxel
+                Voxel v = this.targetObj.voxelObjectData.GetVoxelAt(MathHelper.WorldPosToWorldIntPos(vrcon.rightHand.transform.position));
+                // 如果此处没有voxel
+                if (v.voxel == null)
                 {
-                    objectSelector.selectedObjects.Clear();
+                    // 进一步判断是否与已有voxel相连
                 }
-                else
+                else // 如果有voxel，则根据按键选中或者删除voxel
                 {
                     foreach (var o in os)
                     {
@@ -113,8 +117,7 @@ public class VoxelPlacer : MonoBehaviour
                         {
                             objectSelector.selectedObjects.Add(o);
                             Debug.Log("Object picked " + objectSelector.selectedObjects);
-                            // 记录下Object当前的位置
-                            moveStartLocObj = o.gridBasePoint;
+                            
                         }
                     }
                 }
@@ -124,39 +127,6 @@ public class VoxelPlacer : MonoBehaviour
             if (vrcon.moveObjectInput.stateUp)
             {
                 objectSelector.selectedObjects.Clear();
-            }
-
-            // 保持按住正面按钮
-            if (vrcon.moveObjectInput.state || vrcon.copyObjectInput.state)
-            {
-                MoveObjectByController();
-            }
-
-            // 按下扳机键，启动复制
-            if (vrcon.copyObjectInput.stateDown)
-            {
-                moveStartLocHand = vrcon.rightHand.transform.position;
-
-                // 选中Object，准备复制
-                ObjectComponent[] os = WorldDataManager.Instance.ActiveWorld.GetVoxelObjectsAt(vrcon.rightHand.transform.position);
-                if (os.Length == 0)
-                {
-                    objectSelector.selectedObjects.Clear();
-                }
-                else
-                {
-                    foreach (var o in os)
-                    {
-                        if (!objectSelector.selectedObjects.Contains(os[0]))
-                        {
-                            objectSelector.selectedObjects.Add(o);
-                            Debug.Log("Object picked " + objectSelector.selectedObjects);
-                            // 记录下Object当前的位置
-                            moveStartLocObj = o.gridBasePoint;
-                        }
-                    }
-                    CopyObject();
-                }
             }
 
             // 放开扳机键
