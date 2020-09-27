@@ -105,6 +105,94 @@ namespace Valve.VR
             }
         }
         
+        public virtual SteamVR_Action_Boolean SwitchMode
+        {
+            get
+            {
+                return SteamVR_Actions.default_SwitchMode;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean createVoxel
+        {
+            get
+            {
+                return SteamVR_Actions.default_createVoxel;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean DeleteVoxel
+        {
+            get
+            {
+                return SteamVR_Actions.default_DeleteVoxel;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean selectVoxel
+        {
+            get
+            {
+                return SteamVR_Actions.default_selectVoxel;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean pullVoxel
+        {
+            get
+            {
+                return SteamVR_Actions.default_pullVoxel;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean createObject
+        {
+            get
+            {
+                return SteamVR_Actions.default_createObject;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean copyObject
+        {
+            get
+            {
+                return SteamVR_Actions.default_copyObject;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean moveObject
+        {
+            get
+            {
+                return SteamVR_Actions.default_moveObject;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean rotateObject
+        {
+            get
+            {
+                return SteamVR_Actions.default_rotateObject;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean combineObject
+        {
+            get
+            {
+                return SteamVR_Actions.default_combineObject;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean selectObject
+        {
+            get
+            {
+                return SteamVR_Actions.default_selectObject;
+            }
+        }
+        
         public virtual SteamVR_Action_Vibration Haptic
         {
             get

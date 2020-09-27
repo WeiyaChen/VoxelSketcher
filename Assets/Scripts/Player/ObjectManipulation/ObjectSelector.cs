@@ -73,10 +73,37 @@ public class ObjectSelector : MonoBehaviour
             }
 
         }
-        else
+        else // VR mode
         {
-            
-            
+            if (vrcon.selectObjectInput.stateDown)
+            {
+                // 选中Object
+                ObjectComponent[] os = WorldDataManager.Instance.ActiveWorld.GetVoxelObjectsAt(vrcon.rightHand.transform.position);
+                if (os.Length == 0)
+                {
+                    this.selectedObjects.Clear();
+                }
+                else
+                {
+                    foreach (var o in os)
+                    {
+                        if (!this.selectedObjects.Contains(os[0]))
+                        {
+                            this.selectedObjects.Add(o);
+                            Debug.Log("Object picked " + this.selectedObjects);
+                        }
+                    }
+                }
+            }
         }
+    }
+
+    /// <summary>
+    /// 返回第一个被选中的目标（默认一次只能选中一个Object
+    /// </summary>
+    /// <returns></returns>
+    public ObjectComponent GetSelectedObject() 
+    {
+        return this.selectedObjects[0];
     }
 }

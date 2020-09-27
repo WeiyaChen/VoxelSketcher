@@ -50,6 +50,50 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/default/in/SwitchMode",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/createVoxel",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/DeleteVoxel",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/selectVoxel",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/pullVoxel",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/createObject",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/copyObject",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/moveObject",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/rotateObject",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/combineObject",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/selectObject",
+      "type": "boolean"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },
@@ -86,7 +130,7 @@
   "action_sets": [
     {
       "name": "/actions/default",
-      "usage": "single"
+      "usage": "leftright"
     },
     {
       "name": "/actions/platformer",

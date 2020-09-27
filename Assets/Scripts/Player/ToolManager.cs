@@ -13,7 +13,7 @@ public class ToolManager : Singleton<ToolManager>
     public FaceStretcher faceStretcher;
     public ObjectManipulator objectManipulator;
 
-    public ISteamVR_Action_Boolean switchMode;
+    private VRInputController vrcon;
 
     public enum ToolMode
     {
@@ -30,7 +30,9 @@ public class ToolManager : Singleton<ToolManager>
 
     private void Start()
     {
-        this.Imode = InteractionMode.Desktop;
+        this.Imode = InteractionMode.VR;
+        vrcon = GameObject.Find("VRInputController").GetComponent<VRInputController>();
+        ToolModeSwitching();
     }
 
     // Update is called once per frame
@@ -46,18 +48,34 @@ public class ToolManager : Singleton<ToolManager>
         {
             if (Input.GetKeyDown(KeyCode.F1))
             {
-                Tmode = ToolMode.VoxelManipulation;
+                Tmode = ToolMode.ObjectManipulation;
                 ToolModeSwitching();
             }
             else if (Input.GetKeyDown(KeyCode.F2))
             {
-                Tmode = ToolMode.ObjectManipulation;
-                ToolModeSwitching();
+                if (objectManipulator.objectSelector.selectedObjects.Count != 0)
+                {
+                    Tmode = ToolMode.VoxelManipulation;
+                    ToolModeSwitching();
+                }
             }
         }
         else if (Imode == InteractionMode.VR)
         {
-
+            if (vrcon.switchModeInput.stateDown)
+            { 
+                if (Tmode == ToolMode.ObjectManipulation && objectManipulator.objectSelector.selectedObjects.Count > 0)
+                {
+                    Tmode = ToolMode.VoxelManipulation;
+                    ToolModeSwitching();
+                }
+                else if (Tmode == ToolMode.VoxelManipulation)
+                {
+                    Tmode = ToolMode.ObjectManipulation;
+                    ToolModeSwitching();
+                }
+                Debug.Log("Current Mode: "+Tmode);
+            }
         }
     }
 
@@ -67,6 +85,7 @@ public class ToolManager : Singleton<ToolManager>
         {
             case ToolMode.VoxelManipulation:
                 voxelPlacer.gameObject.SetActive(true);
+                voxelPlacer.SetTargetObj();
                 objectManipulator.gameObject.SetActive(false);
                 break;
             case ToolMode.ObjectManipulation:

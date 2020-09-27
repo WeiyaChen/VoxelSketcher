@@ -136,7 +136,7 @@ public class WorldData
         c.gridBasePoint = basePoint;
         c.voxelObjectData = new ObjectData();
         c.voxelObjectData.isStatic = isStatic;
-
+        
         ObjectList.Add(c);
 
         return c;
