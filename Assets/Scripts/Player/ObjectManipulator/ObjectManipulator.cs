@@ -9,7 +9,9 @@ public class ObjectManipulator : MonoBehaviour
 {
     public ObjectSelector objectSelector;
 
+    // VR
     private VRInputController vrcon;
+    public MergeOptions mOptions;
 
     // 移动物体
     private Vector3 moveStartLocHand;
@@ -60,7 +62,7 @@ public class ObjectManipulator : MonoBehaviour
         }
         else if (mode == ToolManager.InteractionMode.VR)
         {
-            // 按下正面按钮
+            // 按下正面按钮，启动物体移动
             if (vrcon.moveObjectInput.stateDown)
             {
                 moveStartLocHand = vrcon.rightHand.transform.position;
@@ -69,31 +71,33 @@ public class ObjectManipulator : MonoBehaviour
                     moveStartLocObj = this.objectSelector.GetSelectedObject().gridBasePoint;
                 }
             }
-
-            // 放开正面按钮
-            if (vrcon.moveObjectInput.stateUp)
+            else if (vrcon.moveObjectInput.stateUp) // 放开正面按钮，结束物体移动
             {
                 objectSelector.selectedObjects.Clear();
             }
-
-            // 保持按住正面按钮
-            if (vrcon.moveObjectInput.state || vrcon.copyObjectInput.state)
+            else if (vrcon.moveObjectInput.state || vrcon.copyObjectInput.state) // 保持按住正面按钮，移动物体
             {
                 MoveObjectByController();
             }
-
-            // 按下扳机键，启动复制
-            if (vrcon.copyObjectInput.stateDown)
+            else if (vrcon.copyObjectInput.stateDown) // 按下扳机键，启动复制
             {
                 moveStartLocHand = vrcon.rightHand.transform.position;
                 CopyObject();
             }
-
-            // 放开扳机键
-            if (vrcon.copyObjectInput.stateUp)
+            else if (vrcon.copyObjectInput.stateUp) // 放开扳机键
             {
                 objectSelector.selectedObjects.Clear();
             }
+            else if (vrcon.createObjectInput.stateDown) // 启动创建新Object
+            {
+                CreateNewObject();
+            }
+            else if (vrcon.combineObjectInput.stateDown) // 启动合并Object
+            {
+                // 根据菜单选择合并模式
+                mOptions.gameObject.SetActive(true);
+            }
+            
         }
     }
 
@@ -103,9 +107,13 @@ public class ObjectManipulator : MonoBehaviour
     private void CreateNewObject()
     {
         Vector3 leftPoint = vrcon.leftHand.transform.position;
-        Vector3 rightPoint = vrcon.leftHand.transform.position;
-        float edge = (leftPoint - rightPoint).magnitude;
-        //TODO
+        Vector3 rightPoint = vrcon.rightHand.transform.position;
+        Vector3Int min, max;
+        MathHelper.GetMinMaxPoint(leftPoint, rightPoint, out min, out max);
+        ;
+        // 根据双手位置生成一组点，并生成对应的Object
+        WorldDataManager.Instance.ActiveWorld.CreateNewObjectFromGridData(
+            MathHelper.GenerateGridFromDiagnal(min, max), new Voxel());
     }
 
     private void CopyObject()
@@ -125,7 +133,7 @@ public class ObjectManipulator : MonoBehaviour
         
     }
 
-    private void MergeObject(WorldData.MergeType t)
+    public void MergeObject(WorldData.MergeType t)
     {
         for (int i = 1; i < objectSelector.selectedObjects.Count; i++)
         {
@@ -194,5 +202,13 @@ public class ObjectManipulator : MonoBehaviour
         {
             Debug.Log("No objects selected");
         }
+    }
+
+    /// <summary>
+    /// 每次调用，将被选中物体旋转90度
+    /// </summary>
+    private void RotateObject()
+    {
+        // TODO
     }
 }

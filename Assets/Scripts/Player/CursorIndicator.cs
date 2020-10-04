@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseIndicator : MonoBehaviour
+public class CursorIndicator : MonoBehaviour
 {
     public HitPointReader hitPointReader;
 
     private MeshRenderer m_renderer;
+
     // Start is called before the first frame update
     void Start()
     {

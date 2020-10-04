@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+
 public class ObjectSelector : MonoBehaviour
 {
     public HitPointReader hitPointReader;
@@ -79,18 +80,19 @@ public class ObjectSelector : MonoBehaviour
             {
                 // 选中Object
                 ObjectComponent[] os = WorldDataManager.Instance.ActiveWorld.GetVoxelObjectsAt(vrcon.rightHand.transform.position);
-                if (os.Length == 0)
-                {
-                    this.selectedObjects.Clear();
-                }
-                else
+                if (os.Length > 0)
                 {
                     foreach (var o in os)
                     {
+                        // 如果没被选中过
                         if (!this.selectedObjects.Contains(os[0]))
                         {
                             this.selectedObjects.Add(o);
                             Debug.Log("Object picked " + this.selectedObjects);
+                        }
+                        else // 取消选中
+                        {
+                            this.selectedObjects.Remove(o);
                         }
                     }
                 }
@@ -99,7 +101,7 @@ public class ObjectSelector : MonoBehaviour
     }
 
     /// <summary>
-    /// 返回第一个被选中的目标（默认一次只能选中一个Object
+    /// 返回第一个被选中的目标（默认一次只能选中一个Object）
     /// </summary>
     /// <returns></returns>
     public ObjectComponent GetSelectedObject() 

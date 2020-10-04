@@ -18,7 +18,10 @@ public class VRInputController : MonoBehaviour
     public SteamVR_Action_Boolean createVoxelInput;
     public SteamVR_Action_Boolean deleteVoxelInput;
     public SteamVR_Action_Boolean selectVoxelInput;
-    public SteamVR_Action_Boolean pullVoxelInput;
+
+    // Face级输入
+    public SteamVR_Action_Boolean selectFaceInput;
+    public SteamVR_Action_Boolean pullFaceInput;
 
     // 模式控制
     public SteamVR_Action_Boolean switchModeInput;

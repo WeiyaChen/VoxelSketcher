@@ -17,7 +17,8 @@ public class ToolManager : Singleton<ToolManager>
 
     public enum ToolMode
     {
-        VoxelManipulation,
+        PlaceVoxel,
+        FaceStretch,
         ObjectManipulation
     }
     public ToolMode Tmode;
@@ -55,7 +56,15 @@ public class ToolManager : Singleton<ToolManager>
             {
                 if (objectManipulator.objectSelector.selectedObjects.Count != 0)
                 {
-                    Tmode = ToolMode.VoxelManipulation;
+                    Tmode = ToolMode.PlaceVoxel;
+                    ToolModeSwitching();
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.F3))
+            {
+                if (objectManipulator.objectSelector.selectedObjects.Count != 0)
+                {
+                    Tmode = ToolMode.FaceStretch;
                     ToolModeSwitching();
                 }
             }
@@ -66,10 +75,15 @@ public class ToolManager : Singleton<ToolManager>
             { 
                 if (Tmode == ToolMode.ObjectManipulation && objectManipulator.objectSelector.selectedObjects.Count > 0)
                 {
-                    Tmode = ToolMode.VoxelManipulation;
+                    Tmode = ToolMode.PlaceVoxel;
                     ToolModeSwitching();
                 }
-                else if (Tmode == ToolMode.VoxelManipulation)
+                else if (Tmode == ToolMode.PlaceVoxel)
+                {
+                    Tmode = ToolMode.FaceStretch;
+                    ToolModeSwitching();
+                }
+                else if (Tmode == ToolMode.FaceStretch)
                 {
                     Tmode = ToolMode.ObjectManipulation;
                     ToolModeSwitching();
@@ -83,15 +97,26 @@ public class ToolManager : Singleton<ToolManager>
     {
         switch (Tmode)
         {
-            case ToolMode.VoxelManipulation:
+            case ToolMode.ObjectManipulation:
+                objectManipulator.gameObject.SetActive(true);
+
+                voxelPlacer.gameObject.SetActive(false);
+                faceStretcher.faceSelector.hitPointReader.ToggleVRPointer(false);
+                faceStretcher.gameObject.SetActive(false);
+                break;
+            case ToolMode.PlaceVoxel:
                 voxelPlacer.gameObject.SetActive(true);
                 voxelPlacer.SetTargetObj();
+
                 objectManipulator.gameObject.SetActive(false);
-                break;
-            case ToolMode.ObjectManipulation:
-                voxelPlacer.gameObject.SetActive(false);
                 faceStretcher.gameObject.SetActive(false);
-                objectManipulator.gameObject.SetActive(true);
+                break;
+            case ToolMode.FaceStretch:
+                faceStretcher.gameObject.SetActive(true);
+                faceStretcher.faceSelector.hitPointReader.ToggleVRPointer(true);
+
+                voxelPlacer.gameObject.SetActive(false);
+                objectManipulator.gameObject.SetActive(false);
                 break;
             default:
                 break;
@@ -101,13 +126,13 @@ public class ToolManager : Singleton<ToolManager>
     public void InteractionModeUpdate()
     {
         // Switch to VR mode
-        if (Input.GetKeyDown(KeyCode.F3) && Imode == InteractionMode.Desktop)
+        if (Input.GetKeyDown(KeyCode.F4) && Imode == InteractionMode.Desktop)
         {
             Imode = InteractionMode.VR;
             Debug.Log("InteractionMode.VR");
         }
         // VR to desktop
-        if (Input.GetKeyDown(KeyCode.F4) && Imode == InteractionMode.VR)
+        if (Input.GetKeyDown(KeyCode.F5) && Imode == InteractionMode.VR)
         {
             Imode = InteractionMode.Desktop;
             Debug.Log("InteractionMode.Desktop");

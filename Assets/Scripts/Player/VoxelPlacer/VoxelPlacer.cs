@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class VoxelPlacer : MonoBehaviour
 {
-    // 桌面变量
+    // ---- 桌面模式变量 ----
     public HitPointReader hitPointReader;
     public ObjectSelector objectSelector;
 
+    // ---- VR模式变量 ----
+    public VoxelSelector vselector;
     private VRInputController vrcon;
+    Vector3 moveStartLocHand;
+
     // 当前正在被修改的Object
     public ObjectComponent targetObj;
-    public List<Voxel> selectedVoxels;
+
 
     public Voxel voxelArg;
 
@@ -25,7 +29,6 @@ public class VoxelPlacer : MonoBehaviour
             color = Color.white
         };
         vrcon = GameObject.Find("VRInputController").GetComponent<VRInputController>();
-        selectedVoxels = new List<Voxel>();
     }
 
     // Update is called once per frame
@@ -101,9 +104,8 @@ public class VoxelPlacer : MonoBehaviour
         }
         else // VR mode
         {
-            // 如果有某个按键被按下
-            if (vrcon.createVoxelInput.state || vrcon.deleteVoxelInput.state
-                || vrcon.selectVoxelInput.state)
+            // 如果有某个事件被触发
+            if (vrcon.createVoxelInput.state || vrcon.deleteVoxelInput.state)
             {
                 // 选中位置的信息存入一个Voxel对象
                 Vector3Int pos = vrcon.GetScaledHandLocation(vrcon.rightHand);
@@ -119,39 +121,20 @@ public class VoxelPlacer : MonoBehaviour
                         this.targetObj.UpdateObjectMesh();
                     }
                 }
-                else // 如果有voxel，则根据按键选中或者删除voxel
+                else if (vrcon.deleteVoxelInput.state) // 如果有voxel，则根据按键删除voxel
                 {
-                    // 删除这个voxel
-                    if (vrcon.deleteVoxelInput.state)
-                    {
-                        WorldDataManager.Instance.ActiveWorld.DeleteVoxelAt(this.targetObj,pos);
-                        if (this.targetObj.voxelObjectData.VoxelDataDict.Count == 0)
-                            WorldDataManager.Instance.ActiveWorld.DeleteObject(this.targetObj);
-                        this.targetObj.UpdateObjectMesh();
-                    }
-                    else if (!this.selectedVoxels.Contains(v) && vrcon.selectVoxelInput.state)
-                    {
-                        this.selectedVoxels.Add(v);
-                        v.color = Color.yellow;
-                    }
+                    WorldDataManager.Instance.ActiveWorld.DeleteVoxelAt(this.targetObj, pos);
+                    if (this.targetObj.voxelObjectData.VoxelDataDict.Count == 0)
+                        WorldDataManager.Instance.ActiveWorld.DeleteObject(this.targetObj);
+                    this.targetObj.UpdateObjectMesh();
                 }
 
             }
-            // 放开正面按钮
-            if (vrcon.moveObjectInput.stateUp)
-            {
-                objectSelector.selectedObjects.Clear();
-            }
 
-            // 放开扳机键
-            if (vrcon.copyObjectInput.stateUp)
-            {
-                objectSelector.selectedObjects.Clear();
-            }
         }
     }
 
-    public void SetTargetObj() 
+    public void SetTargetObj()
     {
         this.targetObj = this.objectSelector.GetSelectedObject();
     }

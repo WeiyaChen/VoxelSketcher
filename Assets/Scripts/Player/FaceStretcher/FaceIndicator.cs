@@ -2,9 +2,11 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
+/// <summary>
+/// 在拉伸完成后，更新voxel的结果
+/// </summary>
 public class FaceIndicator : MonoBehaviour
 {
-    public FaceSelector voxelSelector;
     public FaceStretcher faceStretcher;
 
     public List<Vector3Int> data;
@@ -20,22 +22,21 @@ public class FaceIndicator : MonoBehaviour
     private void Update()
     {
         data.Clear();
-        foreach (var pair in faceStretcher.stretchedPointDict)
+        
+        foreach (var v in faceStretcher.stretchedPoints)
         {
-            foreach (var v in pair.Value)
+            Vector3Int p = v + faceStretcher.targetObj.gridBasePoint;
+
+            //Do not need repeated points
+            if (!data.Contains(p))
             {
-                Vector3Int p = v + pair.Key.gridBasePoint;
-
-
-                //Do not need repeated points
-                if (!data.Contains(p))
-                {
-                    data.Add(p);
-                }
+                data.Add(p);
             }
         }
+        
         m_meshFilter.sharedMesh = GenerateMesh();
     }
+
     private Mesh GenerateMesh()
     {
 
