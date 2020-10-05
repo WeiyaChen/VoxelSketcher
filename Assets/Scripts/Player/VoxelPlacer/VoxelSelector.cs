@@ -5,13 +5,8 @@ using UnityEngine;
 public class VoxelSelector : MonoBehaviour
 {
     public List<Voxel> selectedVoxels;
+    public VoxelPlacer vp;
     private VRInputController vrcon;
-    private ObjectComponent targetObj;
-
-    public VoxelSelector(ObjectComponent target)
-    {
-        this.targetObj = target;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -33,12 +28,12 @@ public class VoxelSelector : MonoBehaviour
         {
             // 选中位置的信息存入一个Voxel对象
             Vector3Int pos = vrcon.GetScaledHandLocation(vrcon.rightHand);
-            Voxel v = this.targetObj.voxelObjectData.GetVoxelAt(pos);
+            Voxel v = vp.targetObj.voxelObjectData.GetVoxelAt(pos);
             // 如果此处没有voxel
             if (v.voxel == null)
             {
                 // 该位置不靠近已有的体素，取消所有选中的voxel
-                if (!this.targetObj.IsNearVoxel(pos))
+                if (!vp.targetObj.IsNearVoxel(pos))
                 {
                     this.selectedVoxels.Clear();
                 }

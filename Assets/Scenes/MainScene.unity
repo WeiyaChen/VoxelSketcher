@@ -283,7 +283,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!135 &82301551
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -352,7 +352,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82301550}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.21, z: 0}
+  m_LocalPosition: {x: 0, y: 8.6, z: 9.36}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
@@ -542,7 +542,7 @@ MonoBehaviour:
   voxelPlacer: {fileID: 3446382}
   faceStretcher: {fileID: 1844012935}
   objectManipulator: {fileID: 1303126173}
-  Tmode: 1
+  Tmode: 2
   Imode: 1
 --- !u!4 &295604763
 Transform:
@@ -572,6 +572,14 @@ PrefabInstance:
     - target: {fileID: 107946, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 429506, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 429506, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 447954, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -615,6 +623,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 447954, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 494198, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114000010591715100, guid: dc06161b6d97feb419f45f03b62e14b9,
@@ -955,6 +967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedVoxels: []
+  vp: {fileID: 3446382}
 --- !u!4 &679206611
 Transform:
   m_ObjectHideFlags: 0
@@ -1323,7 +1336,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &904715860
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1331,7 +1344,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904715859}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &904715861
 Camera:
   m_ObjectHideFlags: 0
@@ -1383,7 +1396,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904715859}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1405,7 +1418,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904715859}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8a636f62116c0a40bbfefdf876d4608, type: 3}
   m_Name: 
@@ -1510,10 +1523,10 @@ MonoBehaviour:
     actionPath: /actions/default/in/selectVoxel
     needsReinit: 0
   selectFaceInput:
-    actionPath: 
+    actionPath: /actions/default/in/selectFace
     needsReinit: 0
   pullFaceInput:
-    actionPath: 
+    actionPath: /actions/default/in/selectVoxel
     needsReinit: 0
   switchModeInput:
     actionPath: /actions/default/in/SwitchMode
@@ -2018,7 +2031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObj: {fileID: 0}
-  faceSelector: {fileID: 0}
+  faceSelector: {fileID: 1903333161}
   selectionIndicator: {fileID: 1640406689}
   stretchResult: 0
   stretchedPoints: []

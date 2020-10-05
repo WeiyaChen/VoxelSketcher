@@ -72,7 +72,19 @@
          ]
       },
       "/actions/default" : {
-         "chords" : [],
+         "chords" : [
+            {
+               "inputs" : [
+                  [ "/user/hand/left/input/trigger", "click" ],
+                  [ "/user/hand/right/input/trigger", "click" ]
+               ],
+               "output" : "/actions/default/in/createobject"
+            },
+            {
+               "inputs" : [],
+               "output" : "/actions/default/in/combineobject"
+            }
+         ],
          "haptics" : [
             {
                "output" : "/actions/default/out/haptic",
@@ -254,15 +266,6 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/createvoxel"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/right/input/trackpad"
-            },
-            {
-               "inputs" : {
-                  "click" : {
                      "output" : "/actions/default/in/deletevoxel"
                   }
                },
@@ -272,9 +275,6 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/moveobject"
-                  },
-                  "touch" : {
                      "output" : "/actions/default/in/selectobject"
                   }
                },
@@ -293,11 +293,47 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/switchmode"
+                     "output" : "/actions/default/in/moveobject"
                   }
                },
                "mode" : "button",
                "path" : "/user/hand/right/input/grip"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/selectvoxel"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/trackpad"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/createvoxel"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/trackpad"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/selectface"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/trackpad"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/pullface"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/trigger"
             }
          ]
       },
@@ -356,7 +392,7 @@
    "category" : "steamvr_input",
    "controller_type" : "vive_controller",
    "description" : "",
-   "name" : "voxel",
+   "name" : "我为 Vive Controller 进行的 VoxelModelBuilder [Testing] 配置",
    "options" : {},
    "simulated_actions" : []
 }

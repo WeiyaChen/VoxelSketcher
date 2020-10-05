@@ -62,40 +62,37 @@ public class ObjectManipulator : MonoBehaviour
         }
         else if (mode == ToolManager.InteractionMode.VR)
         {
-            // 按下正面按钮，启动物体移动
-            if (vrcon.moveObjectInput.stateDown)
+            if (this.objectSelector.selectedObjects.Count > 0)
             {
-                moveStartLocHand = vrcon.rightHand.transform.position;
-                if (this.objectSelector.selectedObjects.Count > 0)
+                // 按下正面按钮，启动物体移动
+                if (vrcon.moveObjectInput.stateDown)
                 {
+                    moveStartLocHand = vrcon.rightHand.transform.position;
                     moveStartLocObj = this.objectSelector.GetSelectedObject().gridBasePoint;
                 }
+                
+                if (vrcon.moveObjectInput.state || vrcon.copyObjectInput.state) // 保持按住正面按钮，移动物体
+                {
+                    MoveObjectByController();
+                }
+                
+                if (vrcon.copyObjectInput.stateDown) // 按下扳机键，启动复制
+                {
+                    moveStartLocHand = vrcon.rightHand.transform.position;
+                    CopyObject();
+                }
+                
+                if (vrcon.combineObjectInput.stateDown) // 启动合并Object
+                {
+                    // 根据菜单选择合并模式
+                    mOptions.gameObject.SetActive(true);
+                }
             }
-            else if (vrcon.moveObjectInput.stateUp) // 放开正面按钮，结束物体移动
-            {
-                objectSelector.selectedObjects.Clear();
-            }
-            else if (vrcon.moveObjectInput.state || vrcon.copyObjectInput.state) // 保持按住正面按钮，移动物体
-            {
-                MoveObjectByController();
-            }
-            else if (vrcon.copyObjectInput.stateDown) // 按下扳机键，启动复制
-            {
-                moveStartLocHand = vrcon.rightHand.transform.position;
-                CopyObject();
-            }
-            else if (vrcon.copyObjectInput.stateUp) // 放开扳机键
-            {
-                objectSelector.selectedObjects.Clear();
-            }
-            else if (vrcon.createObjectInput.stateDown) // 启动创建新Object
+            
+            // 启动创建新Object
+            if (vrcon.createObjectInput.stateDown) 
             {
                 CreateNewObject();
-            }
-            else if (vrcon.combineObjectInput.stateDown) // 启动合并Object
-            {
-                // 根据菜单选择合并模式
-                mOptions.gameObject.SetActive(true);
             }
             
         }
@@ -118,17 +115,11 @@ public class ObjectManipulator : MonoBehaviour
 
     private void CopyObject()
     {
-        if (objectSelector.selectedObjects.Count > 0)
+        moveStartLocObj = this.objectSelector.GetSelectedObject().gridBasePoint;
+        foreach (var o in objectSelector.selectedObjects)
         {
-            moveStartLocObj = this.objectSelector.GetSelectedObject().gridBasePoint;
-            foreach (var o in objectSelector.selectedObjects)
-            {
-                WorldDataManager.Instance.ActiveWorld.CopyObject(o);
-            }
-        }
-        else
-        {
-            Debug.Log("No objects selected");
+            WorldDataManager.Instance.ActiveWorld.CopyObject(o);
+            Debug.Log(o.name+" has been copied");
         }
         
     }
@@ -185,17 +176,17 @@ public class ObjectManipulator : MonoBehaviour
             foreach (var o in objectSelector.selectedObjects)
             {
                 Vector3 direction = vrcon.rightHand.transform.position - this.moveStartLocHand;
-                Debug.Log("this.moveStartLoc: " + this.moveStartLocHand);
-                Debug.Log("vrcon.rightHand.transform.position: " + vrcon.rightHand.transform.position);
-                Debug.Log("direction: " + direction.ToString("f4"));
+                //Debug.Log("this.moveStartLoc: " + this.moveStartLocHand);
+                //Debug.Log("vrcon.rightHand.transform.position: " + vrcon.rightHand.transform.position);
+                //Debug.Log("direction: " + direction.ToString("f4"));
 
                 Vector3Int delta_axis = new Vector3Int();
                 delta_axis = MathHelper.WorldOriToMainAxis(direction);
-                Debug.Log("delta: " + delta_axis);
+                //Debug.Log("delta: " + delta_axis);
                 int delta_mag = Mathf.CeilToInt(direction.magnitude * 100) / 10;
                 delta_axis.Scale(new Vector3Int(delta_mag, delta_mag, delta_mag));
                 o.gridBasePoint = this.moveStartLocObj + delta_axis;
-                Debug.Log("o.basePoint: " + o.gridBasePoint);
+                //Debug.Log("o.basePoint: " + o.gridBasePoint);
             }
         }
         else

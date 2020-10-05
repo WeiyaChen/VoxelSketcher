@@ -47,7 +47,7 @@ namespace Valve.VR
         
         private static SteamVR_Action_Boolean p_default_selectVoxel;
         
-        private static SteamVR_Action_Boolean p_default_pullVoxel;
+        private static SteamVR_Action_Boolean p_default_pullFace;
         
         private static SteamVR_Action_Boolean p_default_createObject;
         
@@ -60,6 +60,8 @@ namespace Valve.VR
         private static SteamVR_Action_Boolean p_default_combineObject;
         
         private static SteamVR_Action_Boolean p_default_selectObject;
+        
+        private static SteamVR_Action_Boolean p_default_selectFace;
         
         private static SteamVR_Action_Vibration p_default_Haptic;
         
@@ -197,11 +199,11 @@ namespace Valve.VR
             }
         }
         
-        public static SteamVR_Action_Boolean default_pullVoxel
+        public static SteamVR_Action_Boolean default_pullFace
         {
             get
             {
-                return SteamVR_Actions.p_default_pullVoxel.GetCopy<SteamVR_Action_Boolean>();
+                return SteamVR_Actions.p_default_pullFace.GetCopy<SteamVR_Action_Boolean>();
             }
         }
         
@@ -250,6 +252,14 @@ namespace Valve.VR
             get
             {
                 return SteamVR_Actions.p_default_selectObject.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean default_selectFace
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_selectFace.GetCopy<SteamVR_Action_Boolean>();
             }
         }
         
@@ -335,13 +345,14 @@ namespace Valve.VR
                     SteamVR_Actions.default_createVoxel,
                     SteamVR_Actions.default_DeleteVoxel,
                     SteamVR_Actions.default_selectVoxel,
-                    SteamVR_Actions.default_pullVoxel,
+                    SteamVR_Actions.default_pullFace,
                     SteamVR_Actions.default_createObject,
                     SteamVR_Actions.default_copyObject,
                     SteamVR_Actions.default_moveObject,
                     SteamVR_Actions.default_rotateObject,
                     SteamVR_Actions.default_combineObject,
                     SteamVR_Actions.default_selectObject,
+                    SteamVR_Actions.default_selectFace,
                     SteamVR_Actions.default_Haptic,
                     SteamVR_Actions.platformer_Move,
                     SteamVR_Actions.platformer_Jump,
@@ -366,13 +377,14 @@ namespace Valve.VR
                     SteamVR_Actions.default_createVoxel,
                     SteamVR_Actions.default_DeleteVoxel,
                     SteamVR_Actions.default_selectVoxel,
-                    SteamVR_Actions.default_pullVoxel,
+                    SteamVR_Actions.default_pullFace,
                     SteamVR_Actions.default_createObject,
                     SteamVR_Actions.default_copyObject,
                     SteamVR_Actions.default_moveObject,
                     SteamVR_Actions.default_rotateObject,
                     SteamVR_Actions.default_combineObject,
                     SteamVR_Actions.default_selectObject,
+                    SteamVR_Actions.default_selectFace,
                     SteamVR_Actions.platformer_Move,
                     SteamVR_Actions.platformer_Jump,
                     SteamVR_Actions.buggy_Steering,
@@ -399,13 +411,14 @@ namespace Valve.VR
                     SteamVR_Actions.default_createVoxel,
                     SteamVR_Actions.default_DeleteVoxel,
                     SteamVR_Actions.default_selectVoxel,
-                    SteamVR_Actions.default_pullVoxel,
+                    SteamVR_Actions.default_pullFace,
                     SteamVR_Actions.default_createObject,
                     SteamVR_Actions.default_copyObject,
                     SteamVR_Actions.default_moveObject,
                     SteamVR_Actions.default_rotateObject,
                     SteamVR_Actions.default_combineObject,
                     SteamVR_Actions.default_selectObject,
+                    SteamVR_Actions.default_selectFace,
                     SteamVR_Actions.platformer_Jump,
                     SteamVR_Actions.buggy_Brake,
                     SteamVR_Actions.buggy_Reset};
@@ -432,13 +445,14 @@ namespace Valve.VR
                     SteamVR_Actions.default_createVoxel,
                     SteamVR_Actions.default_DeleteVoxel,
                     SteamVR_Actions.default_selectVoxel,
-                    SteamVR_Actions.default_pullVoxel,
+                    SteamVR_Actions.default_pullFace,
                     SteamVR_Actions.default_createObject,
                     SteamVR_Actions.default_copyObject,
                     SteamVR_Actions.default_moveObject,
                     SteamVR_Actions.default_rotateObject,
                     SteamVR_Actions.default_combineObject,
                     SteamVR_Actions.default_selectObject,
+                    SteamVR_Actions.default_selectFace,
                     SteamVR_Actions.platformer_Move,
                     SteamVR_Actions.platformer_Jump,
                     SteamVR_Actions.buggy_Steering,
@@ -464,13 +478,14 @@ namespace Valve.VR
             SteamVR_Actions.p_default_createVoxel = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/createVoxel")));
             SteamVR_Actions.p_default_DeleteVoxel = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/DeleteVoxel")));
             SteamVR_Actions.p_default_selectVoxel = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/selectVoxel")));
-            SteamVR_Actions.p_default_pullVoxel = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/pullVoxel")));
+            SteamVR_Actions.p_default_pullFace = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/pullFace")));
             SteamVR_Actions.p_default_createObject = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/createObject")));
             SteamVR_Actions.p_default_copyObject = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/copyObject")));
             SteamVR_Actions.p_default_moveObject = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/moveObject")));
             SteamVR_Actions.p_default_rotateObject = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/rotateObject")));
             SteamVR_Actions.p_default_combineObject = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/combineObject")));
             SteamVR_Actions.p_default_selectObject = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/selectObject")));
+            SteamVR_Actions.p_default_selectFace = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/selectFace")));
             SteamVR_Actions.p_default_Haptic = ((SteamVR_Action_Vibration)(SteamVR_Action.Create<SteamVR_Action_Vibration>("/actions/default/out/Haptic")));
             SteamVR_Actions.p_platformer_Move = ((SteamVR_Action_Vector2)(SteamVR_Action.Create<SteamVR_Action_Vector2>("/actions/platformer/in/Move")));
             SteamVR_Actions.p_platformer_Jump = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/platformer/in/Jump")));

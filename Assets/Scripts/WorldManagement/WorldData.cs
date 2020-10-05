@@ -9,7 +9,7 @@ public class WorldData
     public static Transform WorldTransform => GameObject.Find("WorldObject").GetComponent<Transform>();
     public string name;
 
-    public float worldSize = 0.1f;
+    public float worldSize = 0.05f;
 
     public List<ObjectComponent> ObjectList;
     public WorldData(string name)
@@ -199,7 +199,7 @@ public class WorldData
         List<ObjectComponent> result = new List<ObjectComponent>();
         foreach (var o in ObjectList)
         {
-            Vector3Int intPos = MathHelper.WorldPosToWorldIntPos(worldPos);
+            Vector3Int intPos = MathHelper.WorldPosToWorldIntPos(worldPos / WorldDataManager.Instance.ActiveWorld.worldSize);
             //local position
             if (o.voxelObjectData.GetVoxelAt(intPos-o.gridBasePoint).voxel != null)
             {

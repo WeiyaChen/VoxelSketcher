@@ -138,4 +138,18 @@ public class ToolManager : Singleton<ToolManager>
             Debug.Log("InteractionMode.Desktop");
         }
     }
+
+    static public void highlightObject(GameObject obj, Color c, float width)
+    {
+        var outline = obj.AddComponent<Outline>();
+
+        outline.OutlineMode = Outline.Mode.OutlineAll;
+        outline.OutlineColor = c;
+        outline.OutlineWidth = width;
+    }
+
+    static public void unHighlightObject(GameObject obj)
+    {
+        Destroy(obj.GetComponent<Outline>());
+    }
 }

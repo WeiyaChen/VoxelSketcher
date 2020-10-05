@@ -88,11 +88,14 @@ public class ObjectSelector : MonoBehaviour
                         if (!this.selectedObjects.Contains(os[0]))
                         {
                             this.selectedObjects.Add(o);
-                            Debug.Log("Object picked " + this.selectedObjects);
+                            ToolManager.highlightObject(o.gameObject, Color.yellow, 5f);
+                            Debug.Log("Object picked " + this.selectedObjects[0].name);
                         }
                         else // 取消选中
                         {
+                            ToolManager.unHighlightObject(o.gameObject); 
                             this.selectedObjects.Remove(o);
+                            Debug.Log("Object released " + o);
                         }
                     }
                 }

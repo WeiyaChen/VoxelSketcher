@@ -137,11 +137,11 @@ namespace Valve.VR
             }
         }
         
-        public virtual SteamVR_Action_Boolean pullVoxel
+        public virtual SteamVR_Action_Boolean pullFace
         {
             get
             {
-                return SteamVR_Actions.default_pullVoxel;
+                return SteamVR_Actions.default_pullFace;
             }
         }
         
@@ -190,6 +190,14 @@ namespace Valve.VR
             get
             {
                 return SteamVR_Actions.default_selectObject;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean selectFace
+        {
+            get
+            {
+                return SteamVR_Actions.default_selectFace;
             }
         }
         

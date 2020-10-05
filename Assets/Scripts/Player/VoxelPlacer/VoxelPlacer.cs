@@ -104,33 +104,36 @@ public class VoxelPlacer : MonoBehaviour
         }
         else // VR mode
         {
-            // 如果有某个事件被触发
-            if (vrcon.createVoxelInput.state || vrcon.deleteVoxelInput.state)
+            // 创建新的voxel
+            if (vrcon.createVoxelInput.state)
             {
                 // 选中位置的信息存入一个Voxel对象
                 Vector3Int pos = vrcon.GetScaledHandLocation(vrcon.rightHand);
                 Debug.Log(pos);
                 Voxel v = this.targetObj.voxelObjectData.GetVoxelAt(pos);
-                // 如果此处没有voxel
-                if (v.voxel == null)
+                // 如果此处没有voxel，进一步判断是否与已有voxel相连，如果相连，则处理按键的事件
+                if (v.voxel == null && this.targetObj.IsNearVoxel(pos))
                 {
-                    // 进一步判断是否与已有voxel相连，如果相连，则处理按键的事件
-                    if (this.targetObj.IsNearVoxel(pos) && vrcon.createVoxelInput.state)
-                    {
-                        WorldDataManager.Instance.ActiveWorld.SetVoxelAt(this.targetObj, pos, voxelArg);
-                        this.targetObj.UpdateObjectMesh();
-                    }
+                    WorldDataManager.Instance.ActiveWorld.SetVoxelAt(this.targetObj, pos, voxelArg);
+                    this.targetObj.UpdateObjectMesh();
                 }
-                else if (vrcon.deleteVoxelInput.state) // 如果有voxel，则根据按键删除voxel
+            }
+            // 如果有voxel，则根据按键删除voxel
+            if (vrcon.deleteVoxelInput.state) 
+            {
+                Debug.Log("Delete");
+                // 选中位置的信息存入一个Voxel对象
+                Vector3Int pos = vrcon.GetScaledHandLocation(vrcon.rightHand);
+                Voxel v = this.targetObj.voxelObjectData.GetVoxelAt(pos);
+                if (v.voxel != null)
                 {
+                    Debug.Log("Delete"+v.voxel.name);
                     WorldDataManager.Instance.ActiveWorld.DeleteVoxelAt(this.targetObj, pos);
                     if (this.targetObj.voxelObjectData.VoxelDataDict.Count == 0)
                         WorldDataManager.Instance.ActiveWorld.DeleteObject(this.targetObj);
                     this.targetObj.UpdateObjectMesh();
                 }
-
             }
-
         }
     }
 

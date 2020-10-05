@@ -21,8 +21,8 @@ public class CursorIndicator : MonoBehaviour
         if (hitPointReader.hitting)
         {
             m_renderer.enabled = true;
-            transform.position = MathHelper.IntPosScaleByFloat(MathHelper.WorldPosToWorldIntPos(
-                (hitPointReader.hitPoint.position - hitPointReader.hitPoint.normal / 2)), WorldDataManager.Instance.ActiveWorld.worldSize) +
+            transform.localScale = transform.localScale * WorldDataManager.Instance.ActiveWorld.worldSize;
+            transform.position = MathHelper.WorldPosToWorldIntPos((hitPointReader.hitPoint.position - hitPointReader.hitPoint.normal / 2)) +
                 new Vector3(0.5f, 0.5f, 0.5f) * WorldDataManager.Instance.ActiveWorld.worldSize;//Mesh offset
         }
     }
