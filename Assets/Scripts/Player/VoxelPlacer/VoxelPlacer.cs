@@ -110,7 +110,7 @@ public class VoxelPlacer : MonoBehaviour
                 // 选中位置的信息存入一个Voxel对象
                 Vector3Int pos = vrcon.GetScaledHandLocation(vrcon.rightHand);
                 Debug.Log(pos);
-                Voxel v = this.targetObj.voxelObjectData.GetVoxelAt(pos);
+                Voxel v = this.targetObj.voxelObjectData.GetVoxelAt(pos - this.targetObj.gridBasePoint);
                 // 如果此处没有voxel，进一步判断是否与已有voxel相连，如果相连，则处理按键的事件
                 if (v.voxel == null && this.targetObj.IsNearVoxel(pos))
                 {
@@ -124,7 +124,7 @@ public class VoxelPlacer : MonoBehaviour
                 Debug.Log("Delete");
                 // 选中位置的信息存入一个Voxel对象
                 Vector3Int pos = vrcon.GetScaledHandLocation(vrcon.rightHand);
-                Voxel v = this.targetObj.voxelObjectData.GetVoxelAt(pos);
+                Voxel v = this.targetObj.voxelObjectData.GetVoxelAt(pos - this.targetObj.gridBasePoint);
                 if (v.voxel != null)
                 {
                     Debug.Log("Delete"+v.voxel.name);

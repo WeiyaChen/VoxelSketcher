@@ -86,27 +86,28 @@ public static class MathHelper
     }
 
     /// <summary>
-    /// 返回两个点构成的最大、最小边界点
+    /// 返回两个点构成的，缩放坐标下的最大、最小边界点
     /// </summary>
-    /// <param name="p1"></param>
-    /// <param name="p2"></param>
-    /// <param name="min"></param>
-    /// <param name="max"></param>
+    /// <param name="p1">世界坐标下的1个点</param>
+    /// <param name="p2">世界坐标下的另1个点</param>
+    /// <param name="min">缩放后的最小点</param>
+    /// <param name="max">缩放后的最大点</param>
     static public void GetMinMaxPoint(Vector3 p1, Vector3 p2, out Vector3Int min, out Vector3Int max)
     {
-
+        Vector3 pp1 = p1 / WorldDataManager.Instance.ActiveWorld.worldSize;
+        Vector3 pp2 = p2 / WorldDataManager.Instance.ActiveWorld.worldSize;
         min = MathHelper.WorldPosToWorldIntPos(
             new Vector3(
-                Mathf.Min(p1.x, p2.x),
-                Mathf.Min(p1.y, p2.y),
-                Mathf.Min(p1.z, p2.z)
+                Mathf.Min(pp1.x, pp2.x),
+                Mathf.Min(pp1.y, pp2.y),
+                Mathf.Min(pp1.z, pp2.z)
                 )
             );
         max = MathHelper.WorldPosToWorldIntPos(
             new Vector3(
-                Mathf.Max(p1.x, p2.x),
-                Mathf.Max(p1.y, p2.y),
-                Mathf.Max(p1.z, p2.z)
+                Mathf.Max(pp1.x, pp2.x),
+                Mathf.Max(pp1.y, pp2.y),
+                Mathf.Max(pp1.z, pp2.z)
                 )
             );
     }

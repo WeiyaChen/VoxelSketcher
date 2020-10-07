@@ -73,10 +73,17 @@ public class FaceSelector : MonoBehaviour
     {
         m_upPoint = null;
         m_downPoint = null;
+        Debug.Log("selectFaceInput");
         if (hitPointReader.hitting)
         {
             m_downPoint = hitPointReader.hitPoint;
             normal = m_downPoint.Value.normal;
+            Debug.Log("hit position: "+m_downPoint.Value.position);
+        }
+        else
+        {
+            selectionPoints.Clear();
+            faceStretcher.stretchedPoints.Clear(); // 为了可视化
         }
     }
 
@@ -91,25 +98,38 @@ public class FaceSelector : MonoBehaviour
             {
                 m_upPoint = currentPoint;
                 Vector3Int min, max;
-                Vector3 down = m_downPoint.Value.position - m_downPoint.Value.normal / 2;
-                Vector3 up = m_upPoint.Value.position - m_upPoint.Value.normal / 2;
+                Vector3 down = m_downPoint.Value.position - m_downPoint.Value.normal / 2 * WorldDataManager.Instance.ActiveWorld.worldSize;
+                Vector3 up = m_upPoint.Value.position - m_upPoint.Value.normal / 2 * WorldDataManager.Instance.ActiveWorld.worldSize;
                 MathHelper.GetMinMaxPoint(down, up, out min, out max);
 
                 UpdateSelectionPoints(min, max);
+                //Debug.Log("min "+min);
+                //Debug.Log("max "+max);
             }
         }
     }
 
+    /// <summary>
+    /// 通过缩放后的边界点，得到一组选中的点集
+    /// </summary>
+    /// <param name="min">最小边界点</param>
+    /// <param name="max">最大边界点</param>
     private void UpdateSelectionPoints(Vector3Int min, Vector3Int max)
     {
         selectionPoints.Clear();
+
         List<Vector3Int> grid = MathHelper.GenerateGridFromDiagnal(min, max);
         foreach (var p in grid)
         {
             Vector3Int pos = p - this.faceStretcher.targetObj.gridBasePoint;
-            if (this.faceStretcher.targetObj.voxelObjectData.GetVoxelAt(pos).voxel != null)
+            //Debug.Log("pos " + pos);
+            Voxel v = this.faceStretcher.targetObj.voxelObjectData.GetVoxelAt(pos);
+            if ( v.voxel!= null)
             {
+                //Debug.Log("hhhhhhhhhhhhhhhhhhhhhh " + v.voxel.posOffset);
                 selectionPoints.Add(pos);
+                faceStretcher.stretchedPoints.Add(pos); // 为了可视化
+                v.color = Color.yellow;
             }
         }
     }

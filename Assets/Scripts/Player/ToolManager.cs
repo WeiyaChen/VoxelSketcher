@@ -114,6 +114,7 @@ public class ToolManager : Singleton<ToolManager>
             case ToolMode.FaceStretch:
                 faceStretcher.gameObject.SetActive(true);
                 faceStretcher.faceSelector.hitPointReader.ToggleVRPointer(true);
+                faceStretcher.targetObj = voxelPlacer.targetObj;
 
                 voxelPlacer.gameObject.SetActive(false);
                 objectManipulator.gameObject.SetActive(false);

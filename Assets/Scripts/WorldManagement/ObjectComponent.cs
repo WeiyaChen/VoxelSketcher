@@ -18,7 +18,7 @@ public class ObjectComponent : MonoBehaviour
     /// <summary>
     /// 判断某个位置点是否与该Object相邻
     /// </summary>
-    /// <param name="worldPosition">待判断的位置点</param>
+    /// <param name="worldPosition">待判断的位置点，已恢复真实尺度</param>
     /// <returns></returns>
     public bool IsNearVoxel(Vector3 worldPosition)
     {

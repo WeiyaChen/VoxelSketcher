@@ -17,13 +17,30 @@ public class CursorIndicator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_renderer.enabled = false;
-        if (hitPointReader.hitting)
+        if (ToolManager.Instance.Tmode == ToolManager.ToolMode.FaceStretch)
         {
-            m_renderer.enabled = true;
-            transform.localScale = transform.localScale * WorldDataManager.Instance.ActiveWorld.worldSize;
-            transform.position = MathHelper.WorldPosToWorldIntPos((hitPointReader.hitPoint.position - hitPointReader.hitPoint.normal / 2)) +
-                new Vector3(0.5f, 0.5f, 0.5f) * WorldDataManager.Instance.ActiveWorld.worldSize;//Mesh offset
+            m_renderer.enabled = false;
+            if (hitPointReader.hitting)
+            {
+                m_renderer.enabled = true;
+                float s = WorldDataManager.Instance.ActiveWorld.worldSize;
+                transform.localScale = new Vector3(s, s, s);
+                transform.position = hitPointReader.hitPoint.position
+                    - hitPointReader.hitPoint.normal / 2 * WorldDataManager.Instance.ActiveWorld.worldSize
+                    + new Vector3(0.05f, 0.05f, 0.05f) * WorldDataManager.Instance.ActiveWorld.worldSize; //Mesh offset
+            }
         }
+        else
+        {
+            // TODO：有待优化
+            m_renderer.enabled = true;
+            float s = WorldDataManager.Instance.ActiveWorld.worldSize;
+            transform.localScale = new Vector3(s, s, s);
+            
+            transform.position = hitPointReader.hitPoint.position
+                - hitPointReader.hitPoint.normal / 2 * WorldDataManager.Instance.ActiveWorld.worldSize
+                + new Vector3(0.05f, 0.05f, 0.05f) * WorldDataManager.Instance.ActiveWorld.worldSize; //Mesh offset
+        }
+        
     }
 }

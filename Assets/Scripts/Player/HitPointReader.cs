@@ -39,15 +39,24 @@ public class HitPointReader : MonoBehaviour
         }
         else // VR mode
         {
-            Physics.Raycast(new Ray(laserPointer.transform.position, laserPointer.transform.forward), out hit);
+            if (ToolManager.Instance.Tmode == ToolManager.ToolMode.FaceStretch)
+            {
+                Physics.Raycast(new Ray(laserPointer.transform.position, laserPointer.transform.forward), out hit);
+                if (hit.collider)
+                {
+                    hitting = true;
+                    hitPoint.position = hit.point; // / WorldDataManager.Instance.ActiveWorld.worldSize;
+                    hitPoint.normal = hit.normal;
+                }
+            }
+            else
+            {
+                hitPoint.position = vrcon.rightHand.transform.position;
+            }
+            
         }
         
-        if (hit.collider)
-        {
-            hitting = true;
-            hitPoint.position = hit.point; // / WorldDataManager.Instance.ActiveWorld.worldSize;
-            hitPoint.normal = hit.normal;
-        }
+        
 
     }
 

@@ -32,9 +32,6 @@ public class FaceStretcher : MonoBehaviour
         //Stretch
         ComputeStretching(ToolManager.Instance.Imode);
 
-        //Make stretched data
-        UpdateStretchedPointDict();
-
         //Apply
         if (ToolManager.Instance.Imode == ToolManager.InteractionMode.Desktop)
         {
@@ -50,7 +47,7 @@ public class FaceStretcher : MonoBehaviour
                 ApplyStretching();
             }
         }
-        
+
     }
 
     private void ComputeStretching(ToolManager.InteractionMode mode)
@@ -80,6 +77,9 @@ public class FaceStretcher : MonoBehaviour
                     stretchResult = (int)(result * 50);
                 }
 
+                //Make stretched data
+                UpdateStretchedPointDict();
+
             }
         }
         else // VR mode
@@ -88,6 +88,7 @@ public class FaceStretcher : MonoBehaviour
             {
                 m_upCursorPoint = null;
                 m_downCursorPoint = vrcon.rightHand.transform.position;
+                Debug.Log("vrcon.pullFaceInput.stateDown");
             }
             if (vrcon.pullFaceInput.state)
             {
@@ -103,7 +104,8 @@ public class FaceStretcher : MonoBehaviour
                     float result = Vector3.Dot(m_upCursorPoint.Value - m_downCursorPoint.Value, normal);
                     stretchResult = (int)(result * 50);
                 }
-
+                //Make stretched data
+                UpdateStretchedPointDict();
             }
         }
     }
@@ -181,6 +183,7 @@ public class FaceStretcher : MonoBehaviour
         }
 
         faceSelector.selectionPoints.Clear();
+        stretchedPoints.Clear();
         stretchResult = 0;
     }
 }
