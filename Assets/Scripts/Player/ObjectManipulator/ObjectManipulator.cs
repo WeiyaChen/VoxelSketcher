@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
@@ -12,6 +13,7 @@ public class ObjectManipulator : MonoBehaviour
     // VR
     private VRInputController vrcon;
     public MergeOptions mOptions;
+    public List<Vector3Int> creatingObjectBuffer;
 
     // 移动物体
     private Vector3 moveStartLocHand;
@@ -88,29 +90,44 @@ public class ObjectManipulator : MonoBehaviour
                     mOptions.gameObject.SetActive(true);
                 }
             }
-            
-            // 启动创建新Object
-            if (vrcon.createObjectInput.stateDown) 
+            else
             {
-                CreateNewObject();
+                // 启动创建新Object
+                if (vrcon.createObjectInput.state)
+                {
+                    CreatingNewObject();
+                }
+                if (vrcon.createObjectInput.stateUp)
+                {
+                    CreateNewObject();
+                }
             }
+            
             
         }
     }
 
     /// <summary>
-    /// 根据双手距离，决定其边长，创建一个立方体
+    /// 准备创建新Object，根据双手距离，决定其边长，创建一个长方体
     /// </summary>
-    private void CreateNewObject()
+    private void CreatingNewObject()
     {
         Vector3 leftPoint = vrcon.leftHand.transform.position;
         Vector3 rightPoint = vrcon.rightHand.transform.position;
         Vector3Int min, max;
         MathHelper.GetMinMaxPoint(leftPoint, rightPoint, out min, out max);
-        ;
-        // 根据双手位置生成一组点，并生成对应的Object
+        creatingObjectBuffer.Clear();
+        creatingObjectBuffer = MathHelper.GenerateGridFromDiagnal(min, max);
+       
+    }
+
+    private void CreateNewObject()
+    {
         WorldDataManager.Instance.ActiveWorld.CreateNewObjectFromGridData(
-            MathHelper.GenerateGridFromDiagnal(min, max), new Voxel());
+            creatingObjectBuffer, new Voxel());
+        WorldDataManager.Instance.ActiveWorld.ObjectList[WorldDataManager.Instance.ActiveWorld.ObjectList .Count-1].UpdateObjectMesh();
+        creatingObjectBuffer.Clear();
+        Debug.Log("new obj has been created");
     }
 
     private void CopyObject()

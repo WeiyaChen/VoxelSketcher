@@ -81,7 +81,10 @@
                "output" : "/actions/default/in/createobject"
             },
             {
-               "inputs" : [],
+               "inputs" : [
+                  [ "/user/hand/right/input/trigger", "click" ],
+                  [ "/user/hand/right/input/trackpad", "click" ]
+               ],
                "output" : "/actions/default/in/combineobject"
             }
          ],
