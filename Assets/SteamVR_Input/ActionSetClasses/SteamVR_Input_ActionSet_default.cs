@@ -201,6 +201,14 @@ namespace Valve.VR
             }
         }
         
+        public virtual SteamVR_Action_Boolean deleteObject
+        {
+            get
+            {
+                return SteamVR_Actions.default_deleteObject;
+            }
+        }
+        
         public virtual SteamVR_Action_Vibration Haptic
         {
             get

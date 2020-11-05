@@ -11,13 +11,25 @@ public class WorldDataManager : Singleton<WorldDataManager>
         m_availableWorlds = new List<WorldData>();
     }
 
-    public void CreateNewWorld(string name)
+    public WorldData CreateNewWorld(string name)
     {
         WorldData world = new WorldData(name);
+        m_availableWorlds.Add(world);
+        return world;
+    }
+    public void CreateNewWorld(WorldData world)
+    {
         m_availableWorlds.Add(world);
     }
     public void ActivateWorld(string name)
     {
+        if (ActiveWorld != null)
+        {
+            for (int i = 0; i < ActiveWorld.ObjectList.Count; i++)
+            {
+                ActiveWorld.DeleteObject(i);
+            }
+        }
         ActiveWorld = m_availableWorlds.Find(x => x.name == name);
     }
 

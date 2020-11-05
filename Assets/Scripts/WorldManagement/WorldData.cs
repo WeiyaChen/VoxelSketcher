@@ -19,6 +19,9 @@ public class WorldData
         ObjectList = new List<ObjectComponent>();
     }
 
+    public WorldData()
+    {
+    }
 
     public enum MergeType
     {
@@ -165,6 +168,28 @@ public class WorldData
 
         ObjectList.Add(c);
     }
+    public void CreateNewObjectFromGridDataWithColor(List<Vector3Int> GridData, List<Color> colors, bool isStatic = false)
+    {
+        var c = GameObject.Instantiate(
+           Resources.Load<GameObject>("Prefabs/VoxelObject"),
+           GridData[0],
+           Quaternion.Euler(new Vector3(0, 0, 0)),
+           WorldTransform).GetComponent<ObjectComponent>();
+
+        //Setup object
+        c.gridBasePoint = GridData[0];
+        c.voxelObjectData = new ObjectData();
+        c.voxelObjectData.isStatic = isStatic;
+        for (int i = 0;i < GridData.Count;i++)
+        {
+            Voxel v = new Voxel();
+            v.voxel = VoxelInfoLibrary.GetVoxel("Stone");
+            v.color = colors[i];
+            SetVoxelAt(c, GridData[i], v);
+        }
+
+        ObjectList.Add(c);
+    }
 
     public ObjectComponent CopyObject(ObjectComponent o)
     {
@@ -235,5 +260,28 @@ public class WorldData
         }
         GameObject.Destroy(o.gameObject);
         ObjectList.Remove(o);
+    }
+
+    public void WorldInit(List<SerializableObject> Objs, float WorldSize)
+    {
+        for (int i = 0; i < Objs.Count; i++)
+        {
+            var c = GameObject.Instantiate(
+            Resources.Load<GameObject>("Prefabs/VoxelObject"),
+            Vector3.zero,
+            Quaternion.Euler(new Vector3(0, 0, 0)),
+            WorldTransform).GetComponent<ObjectComponent>();
+            c.voxelObjectData = new ObjectData();
+            for (int j = 0; j < Objs[i].GridPositions.Count; j++)
+            {
+                c.voxelObjectData.VoxelDataDict.Add(Objs[i].GridPositions[j].Deserialize(), Objs[i].Voxels[j].Deserialize());
+
+            }
+            c.voxelObjectData.isStatic = Objs[i].isStatic;
+            c.gridBasePoint = Objs[i].gridBasePos.Deserialize();
+            ObjectList.Add(c);
+        }
+        worldSize = WorldSize;
+
     }
 }

@@ -9,6 +9,7 @@ public class VRInputController : MonoBehaviour
     // Object级输入
     public SteamVR_Action_Boolean selectObjectInput; 
     public SteamVR_Action_Boolean createObjectInput;
+    public SteamVR_Action_Boolean deleteObjectInput;
     public SteamVR_Action_Boolean copyObjectInput;
     public SteamVR_Action_Boolean moveObjectInput;
     public SteamVR_Action_Boolean rotateObjectInput;

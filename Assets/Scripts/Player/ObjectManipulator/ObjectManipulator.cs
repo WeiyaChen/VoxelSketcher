@@ -89,6 +89,16 @@ public class ObjectManipulator : MonoBehaviour
                     // 根据菜单选择合并模式
                     mOptions.gameObject.SetActive(true);
                 }
+
+                if (vrcon.deleteObjectInput.stateDown) // 启动删除Object
+                {
+                    for (int i = objectSelector.selectedObjects.Count - 1; i >= 0;i--)
+                    {
+                        Debug.Log("Delete" + objectSelector.selectedObjects[i].name);
+                        WorldDataManager.Instance.ActiveWorld.DeleteObject(objectSelector.selectedObjects[i]);
+                    }
+                    
+                }
             }
             else
             {

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class ObjectComponent : MonoBehaviour
 {
@@ -39,6 +40,20 @@ public class ObjectComponent : MonoBehaviour
         meshFilter.mesh = mesh;
         meshCollider.sharedMesh = mesh;
         meshRenderer.materials = mats;
+    }
+    public SerializableObject Serialize()
+    {
+        var obj = new SerializableObject();
+        obj.GridPositions = new List<SerializableVector3Int>();
+        obj.Voxels = new List<SerializableVoxel>();
+        foreach (var e in voxelObjectData.VoxelDataDict)
+        {
+            obj.GridPositions.Add(new SerializableVector3Int(e.Key));
+            obj.Voxels.Add(new SerializableVoxel(e.Value));
+        }
+        obj.isStatic = voxelObjectData.isStatic;
+        obj.gridBasePos = new SerializableVector3Int(gridBasePoint);
+        return obj;
     }
 }
 
