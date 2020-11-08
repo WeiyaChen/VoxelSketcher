@@ -281,12 +281,21 @@
             },
             {
                "inputs" : {
-                  "double" : {
+                  "long" : {
                      "output" : "/actions/default/in/teleport"
                   }
                },
                "mode" : "button",
-               "path" : "/user/hand/left/input/trackpad"
+               "path" : "/user/hand/left/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "long" : {
+                     "output" : "/actions/default/in/worldmenu"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/grip"
             }
          ]
       },

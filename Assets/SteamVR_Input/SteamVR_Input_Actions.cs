@@ -65,6 +65,8 @@ namespace Valve.VR
         
         private static SteamVR_Action_Boolean p_default_deleteObject;
         
+        private static SteamVR_Action_Boolean p_default_worldMenu;
+        
         private static SteamVR_Action_Vibration p_default_Haptic;
         
         private static SteamVR_Action_Vector2 p_platformer_Move;
@@ -273,6 +275,14 @@ namespace Valve.VR
             }
         }
         
+        public static SteamVR_Action_Boolean default_worldMenu
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_worldMenu.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
         public static SteamVR_Action_Vibration default_Haptic
         {
             get
@@ -364,6 +374,7 @@ namespace Valve.VR
                     SteamVR_Actions.default_selectObject,
                     SteamVR_Actions.default_selectFace,
                     SteamVR_Actions.default_deleteObject,
+                    SteamVR_Actions.default_worldMenu,
                     SteamVR_Actions.default_Haptic,
                     SteamVR_Actions.platformer_Move,
                     SteamVR_Actions.platformer_Jump,
@@ -397,6 +408,7 @@ namespace Valve.VR
                     SteamVR_Actions.default_selectObject,
                     SteamVR_Actions.default_selectFace,
                     SteamVR_Actions.default_deleteObject,
+                    SteamVR_Actions.default_worldMenu,
                     SteamVR_Actions.platformer_Move,
                     SteamVR_Actions.platformer_Jump,
                     SteamVR_Actions.buggy_Steering,
@@ -432,6 +444,7 @@ namespace Valve.VR
                     SteamVR_Actions.default_selectObject,
                     SteamVR_Actions.default_selectFace,
                     SteamVR_Actions.default_deleteObject,
+                    SteamVR_Actions.default_worldMenu,
                     SteamVR_Actions.platformer_Jump,
                     SteamVR_Actions.buggy_Brake,
                     SteamVR_Actions.buggy_Reset};
@@ -467,6 +480,7 @@ namespace Valve.VR
                     SteamVR_Actions.default_selectObject,
                     SteamVR_Actions.default_selectFace,
                     SteamVR_Actions.default_deleteObject,
+                    SteamVR_Actions.default_worldMenu,
                     SteamVR_Actions.platformer_Move,
                     SteamVR_Actions.platformer_Jump,
                     SteamVR_Actions.buggy_Steering,
@@ -501,6 +515,7 @@ namespace Valve.VR
             SteamVR_Actions.p_default_selectObject = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/selectObject")));
             SteamVR_Actions.p_default_selectFace = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/selectFace")));
             SteamVR_Actions.p_default_deleteObject = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/deleteObject")));
+            SteamVR_Actions.p_default_worldMenu = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/worldMenu")));
             SteamVR_Actions.p_default_Haptic = ((SteamVR_Action_Vibration)(SteamVR_Action.Create<SteamVR_Action_Vibration>("/actions/default/out/Haptic")));
             SteamVR_Actions.p_platformer_Move = ((SteamVR_Action_Vector2)(SteamVR_Action.Create<SteamVR_Action_Vector2>("/actions/platformer/in/Move")));
             SteamVR_Actions.p_platformer_Jump = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/platformer/in/Jump")));

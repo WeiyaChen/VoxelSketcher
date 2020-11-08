@@ -102,6 +102,10 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/default/in/worldMenu",
+      "type": "boolean"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },

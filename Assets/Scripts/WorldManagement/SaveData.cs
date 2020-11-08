@@ -9,9 +9,8 @@ public class SaveData
 {
 	public float worldSize;
 	public List<SerializableObject> Objs = new List<SerializableObject>();
-	public string SaveFileName = "test";
 
-	static public SaveData SaveWorldData()
+	static public SaveData SaveWorldData(string SaveFileName)
 	{
 		var saveData = new SaveData();
 		saveData.worldSize = WorldDataManager.Instance.ActiveWorld.worldSize;
@@ -21,7 +20,7 @@ public class SaveData
 		}
 		BinaryFormatter bf = new BinaryFormatter();
 		
-		var fs = File.Create(Application.dataPath + "/"+saveData.SaveFileName+".save");
+		var fs = File.Create(Application.dataPath + "/"+ SaveFileName + ".save");
 		bf.Serialize(fs, saveData);
 		fs.Close();
 		return saveData;
@@ -35,11 +34,11 @@ public class SaveData
 		fs.Seek(0, SeekOrigin.Begin);
 		SaveData saveData = (SaveData)bf.Deserialize(fs);
 		fs.Close();
-		Debug.Log("Load " + saveData.SaveFileName);
-		var world=WorldDataManager.Instance.CreateNewWorld(saveData.SaveFileName);
+		Debug.Log("Load " + SaveFileName);
+		var world=WorldDataManager.Instance.CreateNewWorld(SaveFileName);
 		world.WorldInit(saveData.Objs, saveData.worldSize);
 
-		WorldDataManager.Instance.ActivateWorld(saveData.SaveFileName);
+		WorldDataManager.Instance.ActivateWorld(SaveFileName);
 
 	}
 }

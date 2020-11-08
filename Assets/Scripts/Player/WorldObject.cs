@@ -7,8 +7,8 @@ public class WorldObject : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        WorldDataManager.Instance.CreateNewWorld("New World");
-        WorldDataManager.Instance.ActivateWorld("New World");
+        WorldDataManager.Instance.CreateNewWorld("0");
+        WorldDataManager.Instance.ActivateWorld("0");
 
         //Initial Platform
         WorldDataManager.Instance.ActiveWorld.CreateNewObject(new Vector3Int(0, 0, 0),true);

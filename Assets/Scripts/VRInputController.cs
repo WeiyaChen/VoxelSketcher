@@ -26,6 +26,7 @@ public class VRInputController : MonoBehaviour
 
     // 模式控制
     public SteamVR_Action_Boolean switchModeInput;
+    public SteamVR_Action_Boolean worldMenuInput;
 
     public Hand leftHand;
     public Hand rightHand;
