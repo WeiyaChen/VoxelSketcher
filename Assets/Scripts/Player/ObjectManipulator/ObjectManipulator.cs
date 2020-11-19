@@ -13,6 +13,7 @@ public class ObjectManipulator : MonoBehaviour
     // VR
     private VRInputController vrcon;
     public MergeOptions mOptions;
+    public WorldOptions wOptions;
     public List<Vector3Int> creatingObjectBuffer;
 
     // 移动物体
@@ -112,8 +113,13 @@ public class ObjectManipulator : MonoBehaviour
                     CreateNewObject();
                 }
             }
-            
-            
+            if (vrcon.worldMenuInput.stateDown) // 启动world切换
+            {
+                // 根据菜单选择操作
+                wOptions.gameObject.SetActive(true);
+
+            }
+
         }
     }
 

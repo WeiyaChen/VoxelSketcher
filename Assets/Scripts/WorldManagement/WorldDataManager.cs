@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
+
 public class WorldDataManager : Singleton<WorldDataManager>
 {
     private List<WorldData> m_availableWorlds;
@@ -29,6 +31,7 @@ public class WorldDataManager : Singleton<WorldDataManager>
             for (int i = 0; i < ActiveWorld.ObjectList.Count; i++)
             {
                 ActiveWorld.DeleteObject(i);
+                Debug.Log("DeleteObject! " + i);
             }
         }
         ActiveWorld = m_availableWorlds.Find(x => x.name == name);
@@ -36,13 +39,20 @@ public class WorldDataManager : Singleton<WorldDataManager>
 
     public void NextWorld()
     {
-        if (ActiveWorld != null)
+        // 只有一个world时无法切换
+        if (m_availableWorlds.Count > 1)
         {
-            SaveData.SaveWorldData(ActiveWorld.name);
+            if (ActiveWorld != null)
+            {
+                SaveData.SaveWorldData(ActiveWorld.name);
+            }
+            int counter = (Convert.ToInt32(ActiveWorld.name) + 1) % m_availableWorlds.Count;
+            string name = counter.ToString();
+            Debug.Log("m_availableWorlds.Count! " + m_availableWorlds.Count);
+            Debug.Log("name! "+ name);
+            ActivateWorld(name);
         }
-        int counter = (Convert.ToInt32(ActiveWorld.name) + 1) % m_availableWorlds.Count;
-        string name = counter.ToString();
-        ActiveWorld = m_availableWorlds.Find(x => x.name == name);
+        
     }
 
     public WorldData[] GetAvailableWorlds()

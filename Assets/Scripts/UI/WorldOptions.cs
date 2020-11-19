@@ -16,17 +16,19 @@ public class WorldOptions : MonoBehaviour
     {
         string name = this.worldCounter + "";
         SaveData.SaveWorldData(name);
-
+        this.worldCounter++;
+        name = this.worldCounter + "";
         WorldData newWorld = WorldDataManager.Instance.CreateNewWorld(name);
         Debug.Log("OnPressForCreate! "+this.worldCounter);
-        this.worldCounter++;
+
+        // 切换到新world中去
+        WorldDataManager.Instance.NextWorld();
+
         this.gameObject.SetActive(false);
     }
 
     public void OnPressForSwitch(Hand hand)
     {
-        string name = this.worldCounter + "";
-        SaveData.SaveWorldData(name);
         WorldDataManager.Instance.NextWorld();
         Debug.Log("OnPressForSwitch!");
         this.gameObject.SetActive(false);
